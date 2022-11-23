@@ -33,14 +33,14 @@ spec:
           echo "Cloning $REPOSITORY";
           cd /workspace && git clone -q -b $REVISION $REPOSITORY .;
     - name: pre-build-check
-      image: ibmcom/pipeline-base-image
+      image: icr.io/continuous-delivery/pipeline/pipeline-base-image:2.24
       command: ["/bin/bash", "-c"]
       args:
         - set -e -o pipefail;
           echo "hi";
           env;
     - name: launch-test-suite
-      image: ibmcom/pipeline-base-image
+      image: icr.io/continuous-delivery/pipeline/pipeline-base-image:2.24
       command: ["/bin/bash", "-c"]
       args:
         - set -e -o pipefail;
@@ -58,7 +58,7 @@ spec:
     mountPath: /artifacts 
   steps:
     - name: wait-until-done
-      image: ibmcom/pipeline-base-image:2.7
+      image: icr.io/continuous-delivery/pipeline/pipeline-base-image:2.24:2.7
       command: ["/bin/bash", "-c"]
       args:
         - |
@@ -87,7 +87,7 @@ spec:
         description: deploy pipeline to run - name mapped to real file in pipelines-final.json    
   steps:
     - name: deploy-with-kubectl
-      image: ibmcom/pipeline-base-image
+      image: icr.io/continuous-delivery/pipeline/pipeline-base-image:2.24
       command: ["/bin/bash", "-c"]
       args:
         - set -e -o pipefail;
@@ -104,7 +104,7 @@ spec:
     mountPath: /artifacts         
   steps:
     - name: wait-until-deploy-done
-      image: ibmcom/pipeline-base-image
+      image: icr.io/continuous-delivery/pipeline/pipeline-base-image:2.24
       command: ["/bin/bash", "-c"]
       args:
         - |
@@ -130,7 +130,7 @@ spec:
     mountPath: /artifacts         
   steps:
     - name: cleanup
-      image: ibmcom/pipeline-base-image
+      image: icr.io/continuous-delivery/pipeline/pipeline-base-image:2.24
       command: ["/bin/bash", "-c"]
       args:
         - set -e -o pipefail;
